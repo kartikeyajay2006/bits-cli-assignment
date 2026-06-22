@@ -1,62 +1,144 @@
-# Question 5 - Commands And Observations
+# Question 5 - Commands, Outputs, and Observations
 
-## 1. `lsblk`
+## Command 1
+
+```bash
+lsblk
+```
 
 Output:
 
 ```text
-Replace this with your Coursera Lab output.
+NAME    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+vda     253:0    0   20G  0 disk 
+├─vda1  253:1    0   19G  0 part 
+├─vda15 253:15   0   99M  0 part 
+└─vda16 259:0    0  923M  0 part 
+vdb     253:16   0  100G  0 disk 
+└─vdb1  253:17   0  100G  0 part /etc/hosts
+                                 /etc/hostname
+                                 /etc/resolv.conf
+vdc     253:32   0 18.7M  1 disk
 ```
 
-Observation: The `lsblk` command lists block storage devices and their partitions. It helps identify available disks and how they are organized.
+Observation: This command listed block devices and partitions. The output showed devices such as vda, vdb, and vdc.
 
-## 2. `df -h`
+## Command 2
+
+```bash
+df -h
+```
 
 Output:
 
 ```text
-Replace this with your Coursera Lab output.
+Filesystem      Size  Used Avail Use% Mounted on
+overlay          98G  9.7G   84G  11% /
+tmpfs            64M     0   64M   0% /dev
+shm              64M     0   64M   0% /dev/shm
+/dev/vdb1        98G  9.7G   84G  11% /etc/hosts
+tmpfs           980M     0  980M   0% /proc/acpi
+tmpfs           980M     0  980M   0% /proc/scsi
+tmpfs           980M     0  980M   0% /sys/firmware
 ```
 
-Observation: The `df -h` command displays mounted file systems and disk usage in human-readable format. It helps identify available and used storage space.
+Observation: This command displayed disk usage in human-readable format. The output showed that the main overlay filesystem had available free space.
 
-## 3. `df -i`
+## Command 3
+
+```bash
+df -i
+```
 
 Output:
 
 ```text
-Replace this with your Coursera Lab output.
+Filesystem      Inodes  IUsed   IFree IUse% Mounted on
+overlay        6553600 313528 6240072    5% /
+tmpfs           250769     16  250753    1% /dev
+shm             250769      1  250768    1% /dev/shm
+/dev/vdb1      6553600 313528 6240072    5% /etc/hosts
+tmpfs           250769      1  250768    1% /proc/acpi
+tmpfs           250769      1  250768    1% /proc/scsi
+tmpfs           250769      1  250768    1% /sys/firmware
 ```
 
-Observation: The `df -i` command displays inode usage. It is useful because a filesystem can run out of inodes even when disk space is still available.
+Observation: This command displayed inode usage. The output showed low inode usage, so inode availability was not a problem.
 
-## 4. `mount | head -20`
+## Command 4
+
+```bash
+mount | head -20
+```
 
 Output:
 
 ```text
-Replace this with your Coursera Lab output.
+overlay on / type overlay (rw,relatime,lowerdir=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/562/fs:/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/384/fs:/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/383/fs:/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/382/fs:/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/381/fs,upperdir=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/563/fs,workdir=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/563/work,nouserxattr)
+proc on /proc type proc (rw,nosuid,nodev,noexec,relatime)
+tmpfs on /dev type tmpfs (rw,nosuid,size=65536k,mode=755,inode64)
+devpts on /dev/pts type devpts (rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=666)
+sysfs on /sys type sysfs (ro,nosuid,nodev,noexec,relatime)
+cgroup on /sys/fs/cgroup type cgroup2 (ro,nosuid,nodev,noexec,relatime,nsdelegate,memory_recursiveprot)
+mqueue on /dev/mqueue type mqueue (rw,nosuid,nodev,noexec,relatime)
+shm on /dev/shm type tmpfs (rw,nosuid,nodev,noexec,relatime,size=65536k,inode64)
+/dev/vdb1 on /etc/resolv.conf type ext4 (rw,relatime)
+/dev/vdb1 on /etc/hostname type ext4 (rw,relatime)
+/dev/vdb1 on /etc/hosts type ext4 (rw,relatime)
+proc on /proc/bus type proc (ro,nosuid,nodev,noexec,relatime)
+proc on /proc/fs type proc (ro,nosuid,nodev,noexec,relatime)
+proc on /proc/irq type proc (ro,nosuid,nodev,noexec,relatime)
+proc on /proc/sys type proc (ro,nosuid,nodev,noexec,relatime)
+proc on /proc/sysrq-trigger type proc (ro,nosuid,nodev,noexec,relatime)
+tmpfs on /proc/acpi type tmpfs (ro,relatime,inode64)
+tmpfs on /proc/interrupts type tmpfs (rw,nosuid,size=65536k,mode=755,inode64)
+tmpfs on /proc/kcore type tmpfs (rw,nosuid,size=65536k,mode=755,inode64)
+tmpfs on /proc/keys type tmpfs (rw,nosuid,size=65536k,mode=755,inode64)
 ```
 
-Observation: The `mount` command shows mounted filesystems and mount options. This helps understand how storage is attached and accessed by Linux.
+Observation: This command displayed mounted filesystems and mount options. It showed overlay, proc, tmpfs, devpts, and ext4 mounts.
 
-## 5. `smartctl -H /dev/sda`
+## Command 5
+
+```bash
+command -v smartctl
+```
 
 Output:
 
 ```text
-Replace this with your Coursera Lab output, or state if smartctl is unavailable.
+/usr/sbin/smartctl
 ```
 
-Observation: The `smartctl` command checks disk health when supported and installed. If it is unavailable in the lab, storage health can still be documented using `lsblk`, `df -h`, and `df -i`.
+Observation: This command checked whether smartctl was installed. The output showed that smartctl was available at /usr/sbin/smartctl.
 
-## 6. `vi Question5/Storage_Assessment_Report.txt`
+## Command 6
+
+```bash
+smartctl -H /dev/sda
+```
 
 Output:
 
 ```text
-Screenshot should show the report opened or edited in vi.
+smartctl 7.4 2023-08-01 r5530 [aarch64-linux-6.8.0-100-generic] (local build)
+Copyright (C) 2002-23, Bruce Allen, Christian Franke, www.smartmontools.org
+
+Smartctl open device: /dev/sda failed: No such device
 ```
 
-Observation: The `vi` editor was used to create or edit the storage assessment report as required by the assignment. This satisfies the requirement to document findings using `vi`.
+Observation: This command attempted to check disk health. The output showed that /dev/sda did not exist in this environment, so SMART health could not be collected for that device.
 
+## Command 7
+
+```bash
+vi Question5/Storage_Assessment_Report.txt
+```
+
+Output:
+
+```text
+The storage assessment report was opened and edited using vi.
+```
+
+Observation: I used vi to edit the storage report as required by the assignment.
